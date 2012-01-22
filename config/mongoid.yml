@@ -10,4 +10,4 @@ test:
   database: bookingmaster_test
 
 production:
-  uri: //heroku_app2585480:a64be6vk1263uh64ve3hqa3rnm@ds029807.mongolab.com:29807/heroku_app2585480
+  uri: <%= ENV['MONGOLAB_URI'] %>
