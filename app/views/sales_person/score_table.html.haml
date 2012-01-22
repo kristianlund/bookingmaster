@@ -1,0 +1,30 @@
+.document
+  -@meeting_weeks.each do |week|
+    .table_label
+      = "Uke nummer #{week[4,5]}"
+    %br
+    %table.report_table
+      %tr
+        %th.report_header Selger
+        %th.report_header Bookede møter poeng
+        %th.report_header Avholdte møter poeng
+        %th.report_header Salgs poeng
+        %th.report_header Ukes poeng
+        %th.report_header Total poeng møter
+        %th.report_header Total poeng salg
+      -@sales_persons.each do |sales_person|
+        %tr
+          %td.report_cell
+            =sales_person.name
+          %td.report_cell_right
+            =sales_person.week_booked_score[week]
+          %td.report_cell_right
+            =sales_person.week_conducted_score[week]
+          %td.report_cell_right
+            =sales_person.week_sales_score[week]
+          %td.report_cell_right
+            =sales_person.week_scores[week]
+          %td.report_cell_right
+            =sales_person.score['booked'] + sales_person.score['conducted']
+          %td.report_cell_right
+            =sales_person.score['sale']

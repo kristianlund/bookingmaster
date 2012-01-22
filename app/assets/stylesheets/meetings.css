@@ -1,0 +1,43 @@
+.document {
+
+}
+
+.report_table {
+    border: 1px solid black;
+    border-collapse: collapse;
+    background-color: #add8e6;
+}
+
+.report_header {
+    border: 1px solid black;
+    text-align: left;
+    background-color: #87cefa;
+    padding-left: 5px;
+    padding-right: 5px;
+}
+
+.report_cell {
+    border: 1px solid black;
+    padding-left: 5px;
+    padding-right: 5px;
+}
+
+.report_cell_right{
+     border: 1px solid black;
+    padding-left: 5px;
+    padding-right: 5px;
+    text-align: right;
+}
+
+.table_label{
+    font-weight: bolder;
+}
+
+.input_field{
+    float: right;
+    margin-left: 10px;
+}
+
+.field{
+    width: 450px;
+}

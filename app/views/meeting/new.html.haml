@@ -1,0 +1,61 @@
+.document
+  .table_label
+    Nytt møte
+  %br
+  %br
+  %form{:id => "new_meeting",:controller => :meeting, :action => "add_meeting", :method => "post"}
+
+    .field
+      %span.name_label Selger:
+      %select.input_field{:name => "sales_person"}
+        -@sales_persons.each do |person|
+          %option{:value => person.name}= person.name
+
+    %br
+    .field
+      %span.name_label Kunde:
+      %input.input_field{:type => "text", :name => "customer"}
+
+    %br
+    .field
+      %span.name_label Kunde kontakt:
+      %input.input_field{:type => "text", :name => "customer_contact"}
+
+    %input{:value => form_authenticity_token , :type => "hidden", :name => "authenticity_token"}
+    %br
+
+    .field
+      %span.name_label Fagområde:
+      %select.input_field{:name => "meeting_type"}
+        -@meeting_types.each do |type|
+          %option{:value => type.name}= type.name
+
+    %br
+    .field
+      %span.name_label Andre deltagere:
+      %input.input_field{:type => "text", :name => "additional_people"}
+
+    %br
+    .field
+      %span.name_label Beskrivelse av aktivitet:
+      %input.input_field{:type => :text_area, :name => "description"}
+
+    %br
+    .field
+      %span.name_label Type lead:
+      %select.input_field{:name => "lead_type"}
+        %option{:value => "Salg"}= "Salg"
+        %option{:value => "Booking av møte"}= "Booking av møte"
+        %option{:value => "Avholdt møte"}= "Avholdt møte"
+
+    %br
+    .field
+      %span.name_label Møtetidspunkt:
+      .input_field
+        = datetime_select(:person, :meeting_time, :minute_step => 15)
+
+    %br
+    %br
+    %br
+    %input{:type => "submit", :value => "Legg til møte", :class => "button"}
+
