@@ -41,7 +41,7 @@ class MeetingController < ApplicationController
   end
 
   def update_score(name, type, lead_type, added, week)
-    sales_person = SalesPerson.where(:_id => name.lowercase).first
+    sales_person = SalesPerson.where(:_id => name.downcase).first
     value = MeetingType.where(:name => type).first.value
     year_week = week
     update_global(year_week)
