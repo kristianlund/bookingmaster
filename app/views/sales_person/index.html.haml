@@ -37,7 +37,7 @@
         %td.report_cell
           =meeting.customer_contact
         %td.report_cell
-          =meeting.meeting_time.strftime("%m-%d %H:%M")
+          =(meeting.meeting_time + 1.hour).strftime("%m-%d %H:%M")
         %td.report_cell_right
           =meeting.meeting_time.strftime("%V")
         %td.report_cell
@@ -68,7 +68,7 @@
       %th.report_header Selger
 
     -@meetings.each do |meeting|
-      -if meeting.additional_people.size > 0
+      -if meeting.additional_people.size > 0 && meeting.meeting_time > Time.now
         -meeting.additional_people.each do |person|
           %tr
             %td.report_cell
@@ -76,6 +76,6 @@
             %td.report_cell
               =meeting.customer
             %td.report_cell
-              =meeting.meeting_time.strftime("%m-%d %H:%M")
+              =(meeting.meeting_time + 1.hour).strftime("%m-%d %H:%M")
             %td.report_cell
               =meeting.sales_person_id.gsub(/[-]/, " ").capitalize
