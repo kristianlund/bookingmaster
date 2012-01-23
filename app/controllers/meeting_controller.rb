@@ -25,12 +25,14 @@ class MeetingController < ApplicationController
     meeting.score = get_score(params[:meeting_type]).to_i
     meeting.save
 
-    update_score(params[:sales_person], params[:meeting_type], params[:lead_type])
+    update_score(params[:sales_person], params[:meeting_type], params[:lead_type], true, DateTime.now.strftime("%Y%V"))
     redirect_to '/'
   end
 
   def remove_meeting
-    Meeting.where(:_id => params[:id]).delete_all
+    meeting = Meeting.where(:_id => params[:id]).first
+    update_score(meeting.sales_person_id, meeting.type, meeting.lead_type, false, meeting.created_at.strftime("%Y%V"))
+    meeting.delete
     redirect_to :back
   end
 
@@ -38,34 +40,33 @@ class MeetingController < ApplicationController
     MeetingType.where(:name => type).first.value
   end
 
-  def update_score(name, type, lead_type)
-    sales_person = SalesPerson.where(:name => name).first
+  def update_score(name, type, lead_type, added, week)
+    sales_person = SalesPerson.where(:_id => name.lowercase).first
     value = MeetingType.where(:name => type).first.value
-    year_week = DateTime.now.strftime("%Y%V")
+    year_week = week
     update_global(year_week)
 
     week_scores = sales_person.week_scores
-    update_scores(week_scores, year_week, value)
-    sales_person.week_scores = week_scores
+    sales_person.week_scores = update_week_scores(week_scores, year_week, value, added)
 
     if lead_type.eql?("Salg")
       week_scores = sales_person.week_sales_score
-      update_scores(week_scores, year_week, value)
-      sales_person.week_sales_score = week_scores
+      sales_person.week_sales_score = update_week_scores(week_scores, year_week, value, added)
 
     elsif lead_type.eql?("Booking av møte")
       week_scores = sales_person.week_booked_score
-      update_scores(week_scores, year_week, value)
-      sales_person.week_booked_score = week_scores
+      sales_person.week_booked_score = update_week_scores(week_scores, year_week, value, added)
 
     elsif lead_type.eql?("Avholdt møte")
       week_scores = sales_person.week_conducted_score
-      update_scores(week_scores, year_week, value)
-      sales_person.week_conducted_score = week_scores
+      sales_person.week_conducted_score = update_week_scores(week_scores, year_week, value, added)
     end
 
-
-    sales_person.score[translate_lead_type(lead_type)] += value
+    if added
+      sales_person.score[translate_lead_type(lead_type)] += value
+    else
+      sales_person.score[translate_lead_type(lead_type)] -= value
+    end
     sales_person.save
   end
 
@@ -86,11 +87,15 @@ class MeetingController < ApplicationController
     "sale"
   end
 
-  def update_scores(week_scores, year_week, value)
+  def update_week_scores(week_scores, year_week, value, added)
     if week_scores[year_week].nil?
       week_scores[year_week] = value
     else
-      week_scores[year_week] += value
+      if added
+        week_scores[year_week] += value
+      else
+        week_scores[year_week] -= value
+      end
     end
     week_scores
   end

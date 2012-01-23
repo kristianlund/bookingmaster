@@ -3,12 +3,20 @@
 }
 
 .report_table {
-    border: 1px solid black;
+
     border-collapse: collapse;
-    background-color: #add8e6;
+    background-color: #ffffff;
 }
 
 .report_header {
+    border: 1px solid black;
+    text-align: left;
+    background-color: #87cefa;
+    padding-left: 5px;
+    padding-right: 5px;
+}
+
+.report_header_four_col{
     border: 1px solid black;
     text-align: left;
     background-color: #87cefa;
@@ -23,7 +31,7 @@
 }
 
 .report_cell_right{
-     border: 1px solid black;
+    border: 1px solid black;
     padding-left: 5px;
     padding-right: 5px;
     text-align: right;
