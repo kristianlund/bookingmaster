@@ -3,12 +3,24 @@ source 'http://rubygems.org'
 gem 'rails', '3.1.3'
 gem 'mongoid'
 gem 'haml'
-gem 'sass'
 gem 'bson'
 gem "bson_ext"
 gem "net-ldap"
 gem "adauth"
-gem "factory_girl_rails"
+
+group :development do
+  gem 'sass'
+end
+
+group :test do
+  # Pretty printed test output
+  gem "factory_girl_rails"
+  gem 'turn', '0.8.2', :require => false
+end
+
+group :production do
+  #gem 'thin'
+end
 
 # Bundle edge Rails instead:
 # gem 'rails',     :git => 'git://github.com/rails/rails.git'
@@ -38,7 +50,4 @@ gem "factory_girl_rails"
 # To use debugger
 # gem 'ruby-debug19', :require => 'ruby-debug'
 
-group :test do
-  # Pretty printed test output
-  gem 'turn', '0.8.2', :require => false
-end
+

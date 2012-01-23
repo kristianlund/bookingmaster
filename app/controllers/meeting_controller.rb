@@ -13,17 +13,16 @@ class MeetingController < ApplicationController
     meeting_time = DateTime.new(person_hash['meeting_time(1i)'].to_i, person_hash['meeting_time(2i)'].to_i, person_hash['meeting_time(3i)'].to_i, person_hash['meeting_time(4i)'].to_i, person_hash['meeting_time(5i)'].to_i)
 
     meeting = Meeting.new
-    meeting.customer = params[:customer]
-    meeting.customer_contact = params[:customer_contact]
-    meeting.type = params[:meeting_type]
-    meeting.additional_people = [params[:additional_people]]
+    meeting.customer = params[:customer].force_encoding("utf-8")
+    meeting.customer_contact = params[:customer_contact].force_encoding("utf-8")
+    meeting.type = params[:meeting_type].force_encoding("utf-8")
+    meeting.additional_people = [params[:additional_people].force_encoding("utf-8")]
     meeting.meeting_time = meeting_time
     meeting.conducted = false
-    meeting.score = MeetingType.where(:name => params[:meeting_type]).first.value
     meeting.sales_person = sales_person
-    meeting.lead_type = params[:lead_type]
-    meeting.description = params[:description]
-    meeting.score = get_score(params[:meeting_type])
+    meeting.lead_type = params[:lead_type].force_encoding("utf-8")
+    meeting.description = params[:description].force_encoding("utf-8")
+    meeting.score = get_score(params[:meeting_type]).to_i
     meeting.save
 
     update_score(params[:sales_person], params[:meeting_type], params[:lead_type])

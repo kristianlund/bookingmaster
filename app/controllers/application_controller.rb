@@ -10,7 +10,7 @@ class ApplicationController < ActionController::Base
   def authenticate_user
     if current_user.nil?
       Rails.logger.info("no user")
-      redirect_to '/sessions/new'
+      #redirect_to '/sessions/new'
     end
   end
 end
