@@ -29,6 +29,11 @@ class MeetingController < ApplicationController
     redirect_to '/'
   end
 
+  def remove_meeting
+    Meeting.where(:_id => params[:id]).delete_all
+    redirect_to :back
+  end
+
   def get_score(type)
     MeetingType.where(:name => type).first.value
   end

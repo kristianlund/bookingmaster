@@ -11,6 +11,7 @@ Bookingmaster::Application.routes.draw do
   #  end
   #end
 
+  match "/meeting/remove_meeting" => "meeting#remove_meeting"
   match "/sales_person/get_scores" => "sales_person#get_scores"
   match "/meeting/add_meeting" => "meeting#add_meeting"
   match "/meeting/new" => "meeting#new"
