@@ -1,81 +1,72 @@
 .document
-  .table_label
-    -#=@current_user.name.delete("^a-zA-Z ")
-
+  .document_line
+    =link_to("Legg til nytt møte/salg", :controller => 'meeting', :action => 'new')
+  .document_line
+    =link_to("Poenglista", :controller => 'sales_person', :action => 'get_scores')
   %br
-
-  -#Antall poeng:
-  -#=@sales_person.score
-  %br
-
-  =link_to("Legg til nytt møte/salg", :controller => 'meeting', :action => 'new')
-  %br
-  =link_to("Poenglista", :controller => 'sales_person', :action => 'get_scores')
-  %br
-  %br
-
-  %table.report_table
-    %tr
-      %th.report_header Selger
-      %th.report_header Kunde
-      %th.report_header Kunde kontakt
-      %th.report_header Tidspunkt
-      %th.report_header Uke
-      %th.report_header Fagområde
-      %th.report_header Andre deltagere
-      %th.report_header Type lead
-      %th.report_header Beskrivelse av aktivitet
-      %th.report_header Poeng
-
-
-    -@meetings.each do |meeting|
+  .document_line
+    %table.report_table
       %tr
-        %td.report_cell
-          =meeting.sales_person_id.gsub(/[-]/, " ").capitalize
-        %td.report_cell
-          =meeting.customer
-        %td.report_cell
-          =meeting.customer_contact
-        %td.report_cell
-          =(meeting.meeting_time + 1.hour).strftime("%m-%d %H:%M")
-        %td.report_cell_right
-          =meeting.meeting_time.strftime("%V")
-        %td.report_cell
-          =meeting.type
-        %td.report_cell
-          =meeting.additional_people[0]
-        %td.report_cell
-          =meeting.lead_type
-        %td.report_cell
-          =meeting.description
-        %td.report_cell_right
-          =meeting.score
-        %td.blank
-          =link_to("Fjern", :controller => :meeting, :action => :remove_meeting, :id => meeting.id)
+        %th.report_header Selger
+        %th.report_header Kunde
+        %th.report_header Kunde kontakt
+        %th.report_header Tidspunkt
+        %th.report_header Uke
+        %th.report_header Fagområde
+        %th.report_header Andre deltagere
+        %th.report_header Type lead
+        %th.report_header Beskrivelse av aktivitet
+        %th.report_header Poeng
 
+
+      -@meetings.each do |meeting|
+        %tr
+          %td.report_cell
+            =meeting.sales_person_id.gsub(/[-]/, " ").capitalize
+          %td.report_cell
+            =meeting.customer
+          %td.report_cell
+            =meeting.customer_contact
+          %td.report_cell
+            =(meeting.meeting_time + 1.hour).strftime("%m-%d %H:%M")
+          %td.report_cell_right
+            =meeting.meeting_time.strftime("%V")
+          %td.report_cell
+            =meeting.type
+          %td.report_cell
+            =meeting.additional_people[0]
+          %td.report_cell
+            =meeting.lead_type
+          %td.report_cell
+            =meeting.description
+          %td.report_cell_right
+            =meeting.score
+          %td#blank
+            =link_to("Fjern", :controller => :meeting, :action => :remove_meeting, :id => meeting.id)
+
+.document
+  .document_line
+    .table_label
+      Behov for personer på bookede møter (ikke avholdt)
 
   %br
-  .table_label
-    Behov for personer på bookede møter (ikke avholdt)
+  .document_line
+    %table.report_table
+      %tr
+        %th.report_header Navn
+        %th.report_header Kunde
+        %th.report_header Tidspunkt
+        %th.report_header Selger
 
-  %br
-
-  %table.report_table
-    %tr
-      %th.report_header Navn
-      %th.report_header Kunde
-      %th.report_header Tidspunkt
-      %th.report_header Selger
-
-    -@meetings.each do |meeting|
-      -if meeting.additional_people.size > 0 && meeting.meeting_time > Time.now
-        -meeting.additional_people.each do |person|
-          %tr
-            %td.report_cell
-              =person
-            %td.report_cell
-              =meeting.customer
-            %td.report_cell
-              =(meeting.meeting_time + 1.hour).strftime("%m-%d %H:%M")
-            %td.report_cell
-              =meeting.sales_person_id.gsub(/[-]/, " ").capitalize
+      -@meetings.each do |meeting|
+        -if meeting.additional_people.size > 0 && meeting.meeting_time > Time.now
+          -meeting.additional_people.each do |person|
+            %tr
+              %td.report_cell
+                =person
+              %td.report_cell
+                =meeting.customer
+              %td.report_cell
+                =(meeting.meeting_time + 1.hour).strftime("%m-%d %H:%M")
+              %td.report_cell
+                =meeting.sales_person_id.gsub(/[-]/, " ").capitalize

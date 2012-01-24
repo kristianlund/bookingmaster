@@ -1,52 +1,107 @@
 .document {
+  border: 1px solid;
+  border-color: #e3e3e3;
+  border-radius: 4px;
+  margin-bottom: 10px;
+  padding: 10px 0;
+  text-align: left;
+  font-family: tahoma, sans-serif;
+  font-size: 12px;
+  width: 1200px;
+  margin-left: auto;
+  margin-right: auto;
+  box-shadow: 1px 1px 10px #e3e3e3, -1px 1px 10px #e3e3e3, 1px -1px 10px #e3e3e3, -1px -1px 10px #e3e3e3;
+  margin-bottom: 20px;
+  background-image: -webkit-linear-gradient(top, white, #f3f3f3);
+  background-image: -moz-linear-gradient(top, white, #f3f3f3);
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffffff', endColorstr='#f3f3f3',GradientType=0 ); }
+  .document .document_element span {
+    display: block; }
+  .document .document_element .score {
+    min-width: 200px; }
+  .document .document_element .status {
+    min-width: 150px; }
+  .document .document_element .responsible {
+    min-width: 180px; }
+  .document .document_element .title {
+    margin-bottom: 20px; }
+  .document .document_element .documents {
+    margin-bottom: 5px; }
+  .document .document_element .date {
+    min-width: 150px; }
+  .document .document_element .case_title {
+    margin-bottom: 5px; }
+  .document .document_element .municipal_name {
+    min-width: 150px; }
+  .document .document_element .type {
+    min-width: 120px; }
+  .document .document_element .keyword_link {
+    margin-top: 15px; }
+  .document .document_line {
+    margin-left: 20px; }
+  .document .document_line_header {
+    margin-left: 150px; }
+  .document .document_line_content {
+    margin-left: 150px;
+    margin-bottom: 10px; }
+  .document .search_label {
+    font-weight: bold; }
+  .document .center {
+    width: 80px;
+    float: right; }
 
-}
-
-.report_table {
-
+.report_table{
     border-collapse: collapse;
-    background-color: #ffffff;
-}
-
-.report_header {
-    border: 1px solid black;
+    font-family: "Lucida Sans Unicode","Lucida Grande",Sans-Serif;
     text-align: left;
-    background-color: #87cefa;
-    padding-left: 5px;
-    padding-right: 5px;
+    border-spacing: 0;
+    line-height: 1.4em;
 }
 
-.report_header_four_col{
-    border: 1px solid black;
-    text-align: left;
-    background-color: #87cefa;
-    padding-left: 5px;
-    padding-right: 5px;
+.report_table th {
+    background: none repeat scroll 0 0 #B9C9FE;
+    border-bottom: 1px solid #FFFFFF;
+    border-top: 4px solid #AABCFE;
+    color: #003399;
+    font-size: 13px;
+    font-weight: normal;
+    padding: 8px;
 }
 
-.report_cell {
-    border: 1px solid black;
-    padding-left: 5px;
-    padding-right: 5px;
+.report_table td {
+    background: none repeat scroll 0 0 #E8EDFF;
+    border-bottom: 1px solid #FFFFFF;
+    border-top: 1px solid transparent;
+    color: #666699;
+    padding: 8px;
+    vertical-align: top;
 }
 
-.report_cell_right{
-    border: 1px solid black;
-    padding-left: 5px;
-    padding-right: 5px;
-    text-align: right;
+
+html, body, div, span, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, abbr, address, cite, code, del, dfn, em, img, ins, kbd, q, samp, small, strong, sub, sup, var, b, i, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td, article, aside, canvas, details, figcaption, figure, footer, header, hgroup, menu, nav, section, summary, time, mark, audio, video {
+    background: none repeat scroll 0 0 transparent;
+    border: 0 none;
+    font-size: 100%;
+    margin: 0;
+    outline: 0 none;
+    padding: 0;
+    vertical-align: baseline;
 }
 
-.blank{
-    border:  0px;
-    padding-left: 5px;
-    padding-right: 5px;
-    text-align: right;
-    background-color: #ffffff;
+#blank{
+    background-color: transparent;
+    border: 0px;
 }
 
 .table_label{
     font-weight: bolder;
+    font-size: 18px;
+    color: #666699;
+    font-style: italic;
+}
+
+.name_label{
+    font-weight: bold;
 }
 
 .input_field{
