@@ -23,6 +23,8 @@ class MeetingController < ApplicationController
     meeting.lead_type = params[:lead_type].force_encoding("utf-8")
     meeting.description = params[:description].force_encoding("utf-8")
     meeting.score = get_score(params[:meeting_type]).to_i
+
+    puts meeting
     meeting.save
 
     update_score(params[:sales_person], params[:meeting_type], params[:lead_type], true, DateTime.now.strftime("%Y%V"))
